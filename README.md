@@ -10,7 +10,7 @@ When using [Web Components](https://developers.google.com/web/fundamentals/web-c
 
 Wouldn't it be great if there was some terse syntax for defining the few bits that change, like names and attributes? Wouldn't something like this be better?
 
-```
+```javascript
 CustomElement({
   name: "my-element",
   observedAttributes: ["disabled"],
@@ -19,10 +19,10 @@ CustomElement({
 ```
 
 To see the full example in action, run
-```
+```shell
 npm run-script build
 ```
 Then start a simple HTTP Server in the examples directory e.g.
-```
+```shell
 python3 -m http.server 8000
 ```
