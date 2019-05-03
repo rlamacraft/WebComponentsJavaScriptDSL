@@ -1,0 +1,24 @@
+{
+  "name": "webcomponentsjavascriptdsl",
+  "version": "1.0.0",
+  "description": "Declarative embedded DSL for defining Web Components.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cp src/dsl.js examples/bin/dsl.js",
+    "clean": "rm -r examples/bin/* 2>/dev/null"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlamacraft/WebComponentsJavaScriptDSL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rlamacraft/WebComponentsJavaScriptDSL/issues"
+  },
+  "homepage": "https://github.com/rlamacraft/WebComponentsJavaScriptDSL#readme"
+}
