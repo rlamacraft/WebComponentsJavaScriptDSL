@@ -26,3 +26,8 @@ Then start a simple HTTP Server in the examples directory e.g.
 ```shell
 python3 -m http.server 8000
 ```
+
+## Supported Use-Cases
+
+Currently, the intended use-case is where a custom element with a shadow DOM is
+desired to provided detailed semantic markup in the HTML and scoping of styles in CSS. Basic event listening for changed attributes is now supported but this is not intended for JavaScript heavy use-cases of custom elements.

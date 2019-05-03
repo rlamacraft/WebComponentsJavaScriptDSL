@@ -13,6 +13,13 @@ class InvalidTemplateFileError extends Error {
   }
 }
 
+class MissingRequiredAttributePropertyError extends Error {
+  constructor(argName) {
+    super();
+    this.name = `Missing required property of attribute: ${argName}.`;
+  }
+}
+
 async function fetchHTML(url) {
   const res = await fetch(url);
   const html = await res.text();
@@ -32,11 +39,46 @@ async function attachTemplate(shadowRoot, templateURL) {
   return shadowRoot;
 }
 
+class AttributeClass {
+
+  constructor(options) {
+    this._name = options.name;
+    this._changed = options.changed;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get changed() {
+    return this._changed;
+  }
+
+}
+
+export function Attribute(options = {}) {
+
+  const {
+    name,
+    changed = () => {}
+  } = options;
+
+  if(typeof(name) === 'undefined') {
+    throw new MissingRequiredAttributePropertyError('name');
+  }
+
+  return new AttributeClass({
+    name,
+    changed
+  });
+
+}
+
 export function CustomElement(options = {}) {
 
   const {
     name,
-    observedAttributes = [],
+    attributes = [],
     templateURL
   } = options;
 
@@ -57,14 +99,16 @@ export function CustomElement(options = {}) {
       attachTemplate(shadowRoot, templateURL).catch(e => {
         console.error(new InvalidTemplateFileError(templateURL, e));
       });
-
-      this.addEventListener('click', e => {
-        alert('foo');
-      });
     }
 
     static get observedAttributes() {
-      return observedAttributes;
+      return attributes.map(a => a.name);
+    }
+
+    attributeChangedCallback(attrName, oldValue, newValue) {
+      attributes
+        .filter(a => a.name === attrName)
+        .map(a => a.changed(oldValue, newValue));
     }
 
   });

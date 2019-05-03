@@ -1,9 +1,14 @@
-import {CustomElement} from './bin/dsl.js';
+import {CustomElement, Attribute} from './bin/dsl.js';
 
 CustomElement({
   name: "my-element",
-  observedAttributes: ["disabled"],
-  templateURL: "./template.html"
+  templateURL: "./template.html",
+  attributes: [
+    Attribute({
+      name: "disabled",
+      changed: (oldV, newV) => {alert(`${oldV} to ${newV}`)}
+    })
+  ]
 });
 
 
